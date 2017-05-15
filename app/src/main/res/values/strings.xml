@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">OwnedLock</string>
+    <string name="title_preview">Preview</string>
+    <string name="title_settings">Settings</string>
+    <string name="title_info">Information</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
