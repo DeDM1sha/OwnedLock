@@ -4,17 +4,30 @@ import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.View;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Timer;
+import java.util.TimerTask;
+
 
 public class MainActivity extends AppCompatActivity {
 
     private PreviewFragment PreveiwFragment;
     private InfoFragment InfoFragment;
     private SettingsFragment SettingsFragment;
-    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+
+    private SettingsResource settingsResource = new SettingsResource(false, false, false);
+
+    public String Time;
+    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -26,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
                     ft.commit();
                     return true;
                 case R.id.navigation_preview:
-                    PreveiwFragment = new PreviewFragment();
+                    PreveiwFragment = new PreviewFragment(settingsResource);
                     ft.replace(R.id.content, PreveiwFragment);
                     ft.commit();
                     return true;
@@ -39,19 +52,24 @@ public class MainActivity extends AppCompatActivity {
         }
 
     };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        setRequestedOrientation (ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        PreveiwFragment = new PreviewFragment();
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        PreveiwFragment = new PreviewFragment(settingsResource);
         InfoFragment = new InfoFragment();
-        SettingsFragment = new SettingsFragment();
-
-
-
+        SettingsFragment = new SettingsFragment(settingsResource);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-        navigation.setSelectedItemId(R.id.navigation_settings);
+        navigation.setSelectedItemId(R.id.navigation_preview);
+
     }
+
+
+
+
+
 }
+
