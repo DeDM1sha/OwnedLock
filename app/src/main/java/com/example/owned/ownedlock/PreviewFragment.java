@@ -1,23 +1,18 @@
 package com.example.owned.ownedlock;
 
-
-import android.content.Context;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-
+import android.widget.Toast;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.TimerTask;
-
 
 public class PreviewFragment extends Fragment implements View.OnClickListener {
     private TextView TimeView;
@@ -25,8 +20,8 @@ public class PreviewFragment extends Fragment implements View.OnClickListener {
     private Button[] buttons = new Button[10];
     private Button DeleteButton;
     private String Password = "";
-    private String Time;
-    private boolean Click = false;
+    private String Time = "";
+    private String TimeCode = "";
     private SettingsResource settingsResource;
 
     private MyTimerTask MyTimerTask = new MyTimerTask();
@@ -54,51 +49,53 @@ public class PreviewFragment extends Fragment implements View.OnClickListener {
             for (short i = 0; i < 10; i++)
                 buttons[i].setOnClickListener(this);
         DeleteButton.setOnClickListener(this);
-
-        //////////////////////////////////////////////////////////
-        PasswordView.setText(   "First:" + settingsResource.isFirst() + "\n" +
-                                "Second:" + settingsResource.isSecond() + "\n" +
-                                "Third:" + settingsResource.isThird());
-        //////////////////////////////////////////////////////////
-
         TimeView.setText(getTime());
         return view;
     }
 
     @Override
     public void onClick(View v) {
-
-        if (Click){
-            Password = "";
-            Click = false;
-            PasswordView.setTextColor(Color.WHITE);
-        }
         Button button = (Button) v;
             if (button.getText().equals("delete")) {
+                    if (Password.length() == 4)
+                        PasswordView.setTextColor(Color.WHITE);
                 char [] Massive = Password.toCharArray();
                 short C = (short) Password.length();
                 Password = "";
                 for (short i = 0; i < C-1; i++)
                     Password = Password + Massive[i];
                     PasswordView.setText(Password);
-                if (Click) {
-                    Click = false;
-                    PasswordView.setTextColor(Color.WHITE);
-                }
             }
             else {
+                    if (Password.length() == 4){
+                        Password = "";
+                        PasswordView.setTextColor(Color.WHITE);
+                    }
                 Password += button.getText();
                 PasswordView.setText(Password);
-
             }
     }
 
     class MyTimerTask extends AsyncTask<Void, Void, Void> {
         boolean inWork = true;
+        boolean Message = false;
         @Override
         protected void onProgressUpdate(Void... values) {
             inWork = true;
             TimeView.setText(getTime());
+               if (Password.length() == 4 && !Message) {
+                    if (Password.equals(TimeCode)) {
+                        Toast.makeText(getActivity(), "Пароль верный!", Toast.LENGTH_LONG).show();
+                        PasswordView.setTextColor(Color.GREEN);
+                    }
+                    else {
+                        Toast.makeText(getActivity(), "Неверный пароль!", Toast.LENGTH_LONG).show();
+                        PasswordView.setTextColor(Color.RED);
+                    }
+                    Message = true;
+                }
+                else if (Password.length() < 4)
+                    Message = false;
         }
 
         @Override
@@ -106,7 +103,7 @@ public class PreviewFragment extends Fragment implements View.OnClickListener {
 
             while (inWork) {
                 publishProgress();
-                SystemClock.sleep(500);
+                SystemClock.sleep(1);
             }
             return null;
         }
@@ -114,17 +111,26 @@ public class PreviewFragment extends Fragment implements View.OnClickListener {
         private void stop() {
             inWork = false;
         }
+
     }
 
     private String getTime() {
-        Time = String.valueOf(new SimpleDateFormat("kk:mm:ss").format(new Date(new Date().getTime())));
+            if (settingsResource.isSwitch_12h())
+                Time = String.valueOf(new SimpleDateFormat("hh:mm:ss").format(new Date(new Date().getTime())));
+            else {
+                Time = String.valueOf(new SimpleDateFormat("kk:mm:ss").format(new Date(new Date().getTime())));
+                char[] chArray = Time.toCharArray();
+                    if (chArray[0] == '2' && chArray[1] == '4') {// функция SimpleDateFormat показывает часы в формате 1-24, здесь производится замена числа 24 на 00
+                        chArray[0] = '0';
+                        chArray[1] = '0';
+                    }
+                Time = "" + chArray[0] + chArray[1] + ":" + chArray[3] + chArray[4] + ":" + chArray[6] + chArray[7];
+            }
         char[] chArray = Time.toCharArray();
-        if (chArray[0] == '2' && chArray[1] == '4')// функция SimpleDateFormat показывает часы в формате 1-24, здесь производится замена числа 24 на 00
-        {
-            chArray[0] = '0';
-            chArray[1] = '0';
-        }
-        Time = "" + chArray[0] + chArray[1] + ":" + chArray[3] + chArray[4] + ":" + chArray[6] + chArray[7];
+        TimeCode = "" + chArray[0] + chArray[1] + chArray[3] + chArray[4];
+                if (settingsResource.isReverse()){
+                    TimeCode = "" + chArray[4] + chArray[3] + chArray[1] + chArray[0];
+            }
         return Time;
     }
 

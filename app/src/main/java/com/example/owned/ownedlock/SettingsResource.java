@@ -1,41 +1,34 @@
 package com.example.owned.ownedlock;
 
-/**
- * Created by Owned on 16.05.2017.
- */
-
 public class SettingsResource {
-    private boolean first;
-    private boolean second;
-    private boolean third;
 
-    public SettingsResource(boolean first, boolean second, boolean third) {
-        this.first = first;
-        this.second = second;
-        this.third = third;
+    private boolean Switch_12h;
+    private boolean Switch_24h;
+    private boolean Reverse;
+    public SettingsResource(boolean Switch_12h, boolean setSwitch_24h, boolean Reverse) {
+        this.Switch_12h = Switch_12h;
+        this.Switch_24h = setSwitch_24h;
+        this.Reverse = Reverse;
+    }
+    public boolean isSwitch_12h () {
+        return Switch_12h;
+    }
+    public void setSwitch_12h (boolean Switch_12h) {
+        this.Switch_12h = Switch_12h;
     }
 
-    public boolean isFirst() {
-        return first;
+    public boolean isSwitch_24h () {
+        return Switch_24h;
+    }
+    public void setSwitch_24h (boolean setSwitch_24h) {
+        this.Switch_24h = setSwitch_24h;
     }
 
-    public void setFirst(boolean first) {
-        this.first = first;
+    public boolean isReverse () {
+        return Reverse;
+    }
+    public void setReverse (boolean Reverse) {
+        this.Reverse = Reverse;
     }
 
-    public boolean isSecond() {
-        return second;
-    }
-
-    public void setSecond(boolean second) {
-        this.second = second;
-    }
-
-    public boolean isThird() {
-        return third;
-    }
-
-    public void setThird(boolean third) {
-        this.third = third;
-    }
 }

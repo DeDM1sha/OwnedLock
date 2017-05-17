@@ -4,18 +4,9 @@ import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
-import android.view.View;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Timer;
-import java.util.TimerTask;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -24,7 +15,7 @@ public class MainActivity extends AppCompatActivity {
     private InfoFragment InfoFragment;
     private SettingsFragment SettingsFragment;
 
-    private SettingsResource settingsResource = new SettingsResource(false, false, false);
+    private SettingsResource settingsResource = new SettingsResource(false, true, false);
 
     public String Time;
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener = new BottomNavigationView.OnNavigationItemSelectedListener() {

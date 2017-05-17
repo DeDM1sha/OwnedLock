@@ -10,41 +10,103 @@
         android:padding="10dp">
 
         <TextView
-            android:id="@+id/titleSettings"
+            android:id="@+id/Title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
-            android:textColor="#ffffff"
-            android:textSize="24sp"
-            android:layout_marginBottom="10dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="30dp"
+            android:text="Настройки"
             android:textAlignment="center"
-            android:text="Settings" />
+            android:textColor="#ffffff"
+            android:textSize="24sp" />
 
-        <CheckBox
-            android:id="@+id/checkBox"
+        <EditText
+            android:id="@+id/TimeFormat"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/titleSettings"
-            android:text="first" />
+            android:layout_below="@+id/Title"
+            android:layout_marginTop="30dp"
+            android:ems="17"
+            android:inputType="textPersonName"
+            android:text="Формат времени"
+            android:enabled="false"
+            android:textColor="@color/white"/>
 
-        <CheckBox
-            android:id="@+id/checkBox2"
+        <TextView
+            android:id="@+id/Pin_12h"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/titleSettings"
-            android:layout_centerHorizontal="true"
-            android:text="second" />
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/TimeFormat"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="15dp"
+            android:text="12-ти часовой" />
 
-        <CheckBox
-            android:id="@+id/checkBox3"
+        <TextView
+            android:id="@+id/Pin_24h"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:layout_below="@+id/titleSettings"
-            android:text="third" />
+            android:layout_below="@+id/TimeFormat"
+            android:layout_marginRight="40dp"
+            android:layout_marginTop="15dp"
+            android:text="24-ти часовой" />
+
+        <Switch
+            android:id="@+id/Switch_12h"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/Pin_12h"
+            android:layout_alignRight="@+id/Pin_12h"
+            android:layout_below="@+id/Pin_12h"
+            android:layout_marginTop="30dp"
+            android:text="Выкл" />
+
+        <Switch
+            android:id="@+id/Switch_24h"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/Pin_24h"
+            android:layout_alignRight="@+id/Pin_24h"
+            android:layout_below="@+id/Pin_24h"
+            android:layout_marginTop="30dp"
+            android:checked="true"
+            android:text="Вкл" />
+
+        <EditText
+            android:id="@+id/Modifications"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/Switch_12h"
+            android:layout_marginTop="30dp"
+            android:ems="17"
+            android:inputType="textPersonName"
+            android:text="Модификации пароля"
+            android:enabled="false"
+            android:textColor="@color/white"/>
+
+        <TextView
+            android:id="@+id/Text_Reverse"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/Modifications"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
+            android:text="Задом наперед" />
+
+        <Switch
+            android:id="@+id/Switch_Reverse"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/Text_Reverse"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
+            android:text="Выкл" />
+
 
     </RelativeLayout>
 </FrameLayout>
