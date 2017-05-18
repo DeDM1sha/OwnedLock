@@ -4,14 +4,15 @@
     <string name="title_settings">Настройки</string>
     <string name="title_info">Информация</string>
 
-    <string name="settings_time_title_hour">Часавая настройка</string>
+    <string name="settings_time_title_hour">Часовая настройка</string>
     <string name="settings_time_title_minute">Минутная настройка</string>
     <string name="settings_time_title_second">Секундная настройка</string>
 
     <string name="settings_time_description_hour">Описание часовой настройки</string>
     <string name="settings_time_description_minute">Описание минутной настройки</string>
     <string name="settings_time_description_second">Описание секундной настройки</string>
+    <string name="not_found">Не найдено</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="on">Вкл</string>
+    <string name="off">Выкл</string>
 </resources>

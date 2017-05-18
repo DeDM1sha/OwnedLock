@@ -1,6 +1,5 @@
 package com.example.owned.ownedlock;
 
-import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.SystemClock;
@@ -9,16 +8,17 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.Switch;
-import android.widget.TextView;
 
 public class SettingsFragment extends Fragment {
 
     private SettingsResource settingsResource;
     private Switch Switch_12h;
     private Switch Switch_24h;
-    private Switch Reverse;
+    private Switch Switch_Reverse;
+    private Switch Switch_Hours;
+    private Switch Switch_Minutes;
+    private Switch Switch_Seconds;
     private MyTimerTask MyTimerTask = new MyTimerTask();
 
     public SettingsFragment(SettingsResource settingsResource) {
@@ -31,12 +31,11 @@ public class SettingsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_settings, container, false);
         Switch_12h = (Switch) view.findViewById (R.id.Switch_12h);
         Switch_24h = (Switch) view.findViewById (R.id.Switch_24h);
-        Reverse = (Switch) view.findViewById (R.id.Switch_Reverse);
-
-        final Switch hourSwitch = (Switch) view.findViewById(R.id.Switch_Hours);
-        final Switch minuteSwitch = (Switch) view.findViewById(R.id.Switch_Minutes);
-        final Switch secondSwitch = (Switch) view.findViewById(R.id.Switch_Seconds);
-
+        Switch_Reverse = (Switch) view.findViewById (R.id.Switch_Reverse);
+        Switch_Hours = (Switch) view.findViewById(R.id.Switch_Hours);
+        Switch_Minutes = (Switch) view.findViewById(R.id.Switch_Minutes);
+        Switch_Seconds = (Switch) view.findViewById(R.id.Switch_Seconds);
+        
         Switch_12h.setOnClickListener (new View.OnClickListener() {
             @Override
             public void onClick (View e) {
@@ -63,10 +62,10 @@ public class SettingsFragment extends Fragment {
         });
         Switch_24h.setClickable(false);
 
-        Reverse.setOnClickListener (new View.OnClickListener() {
+        Switch_Reverse.setOnClickListener (new View.OnClickListener() {
             @Override
             public void onClick(View e) {
-                if (Reverse.isChecked())
+                if (Switch_Reverse.isChecked())
                     settingsResource.setReverse(true);
                 else
                     settingsResource.setReverse (false);
@@ -74,10 +73,11 @@ public class SettingsFragment extends Fragment {
         });
 
 
-        hourSwitch.setOnClickListener(new View.OnClickListener() {
+        Switch_Hours.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (hourSwitch.isChecked()) {
+                if (Switch_Hours.isChecked()) {
+                    Switch_Hours.setText (R.string.on);
                     TimeSettingsFragment fragment =
                             new TimeSettingsFragment(TimeSettingsFragment.HOUR, settingsResource);
                     FragmentTransaction ft = ((MainActivity)getActivity()).getSupportFragmentManager().beginTransaction();
@@ -85,16 +85,17 @@ public class SettingsFragment extends Fragment {
                     ft.addToBackStack(null);
                     ft.commit();
                 } else {
-                    // off changed
+                   Switch_Hours.setText (R.string.off);
                 }
 
             }
         });
 
-        minuteSwitch.setOnClickListener(new View.OnClickListener() {
+        Switch_Minutes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (minuteSwitch.isChecked()) {
+                if (Switch_Minutes.isChecked()) {
+                    Switch_Minutes.setText (R.string.on);
                     TimeSettingsFragment fragment =
                             new TimeSettingsFragment(TimeSettingsFragment.MINUTE, settingsResource);
                     FragmentTransaction ft = ((MainActivity)getActivity()).getSupportFragmentManager().beginTransaction();
@@ -102,16 +103,17 @@ public class SettingsFragment extends Fragment {
                     ft.addToBackStack(null);
                     ft.commit();
                 } else {
-                    // off changed
+                    Switch_Minutes.setText (R.string.off);
                 }
 
             }
         });
 
-        secondSwitch.setOnClickListener(new View.OnClickListener() {
+        Switch_Seconds.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (secondSwitch.isChecked()) {
+                if (Switch_Seconds.isChecked()) {
+                    Switch_Seconds.setText (R.string.on);
                     TimeSettingsFragment fragment =
                             new TimeSettingsFragment(TimeSettingsFragment.SECOND, settingsResource);
                     FragmentTransaction ft = ((MainActivity)getActivity()).getSupportFragmentManager().beginTransaction();
@@ -119,7 +121,7 @@ public class SettingsFragment extends Fragment {
                     ft.addToBackStack(null);
                     ft.commit();
                 } else {
-                    // off changed
+                    Switch_Seconds.setText (R.string.off);
                 }
 
             }
@@ -136,27 +138,27 @@ public class SettingsFragment extends Fragment {
             inWork = true;
                 if (settingsResource.isSwitch_12h()) {
                     Switch_12h.setChecked(true);
-                    Switch_12h.setText("Вкл");
+                    Switch_12h.setText(R.string.on);
                 }
                 else {
                     Switch_12h.setChecked(false);
-                    Switch_12h.setText("Выкл");
+                    Switch_12h.setText(R.string.off);
                 }
                 if (settingsResource.isSwitch_24h()) {
                     Switch_24h.setChecked(true);
-                    Switch_24h.setText("Вкл");
+                    Switch_24h.setText(R.string.on);
                 }
                 else {
                     Switch_24h.setChecked(false);
-                    Switch_24h.setText("Выкл");
+                    Switch_24h.setText(R.string.off);
                 }
                 if (settingsResource.isReverse()) {
-                    Reverse.setChecked(true);
-                    Reverse.setText("Вкл");
+                    Switch_Reverse.setChecked(true);
+                    Switch_Reverse.setText(R.string.on);
                 }
                 else {
-                    Reverse.setChecked(false);
-                    Reverse.setText("Выкл");
+                    Switch_Reverse.setChecked(false);
+                    Switch_Reverse.setText(R.string.off);
                 }
 
         }

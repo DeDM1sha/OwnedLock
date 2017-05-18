@@ -17,7 +17,6 @@
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="45dp"
-            android:text="hour | minute | second"
             android:textSize="20sp" />
 
         <TextView

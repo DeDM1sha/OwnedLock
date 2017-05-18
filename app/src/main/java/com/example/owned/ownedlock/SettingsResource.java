@@ -4,11 +4,11 @@ public class SettingsResource {
 
     private boolean Switch_12h;
     private boolean Switch_24h;
-    private boolean Reverse;
-    public SettingsResource(boolean Switch_12h, boolean setSwitch_24h, boolean Reverse) {
+    private boolean Switch_Reverse;
+    public SettingsResource(boolean Switch_12h, boolean setSwitch_24h, boolean Switch_Reverse) {
         this.Switch_12h = Switch_12h;
         this.Switch_24h = setSwitch_24h;
-        this.Reverse = Reverse;
+        this.Switch_Reverse = Switch_Reverse;
     }
     public boolean isSwitch_12h () {
         return Switch_12h;
@@ -25,10 +25,10 @@ public class SettingsResource {
     }
 
     public boolean isReverse () {
-        return Reverse;
+        return Switch_Reverse;
     }
-    public void setReverse (boolean Reverse) {
-        this.Reverse = Reverse;
+    public void setReverse (boolean Switch_Reverse) {
+        this.Switch_Reverse = Switch_Reverse;
     }
 
 }

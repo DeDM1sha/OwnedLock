@@ -40,6 +40,10 @@ public class TimeSettingsFragment extends Fragment {
                 description = R.string.settings_time_description_second;
                 break;
         }
+        if (title == -1)
+            title = R.string.not_found;
+        if (description == -1)
+            description = R.string.not_found;
     }
 
 
