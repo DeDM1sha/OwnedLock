@@ -15,4 +15,10 @@
 
     <string name="on">Вкл</string>
     <string name="off">Выкл</string>
+
+    <string name="Welcom"><b>Добро пожаловать!</b></string>
+    <string name="information_about_password">Придумайте <i>пароль</i> для входа в приложение</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

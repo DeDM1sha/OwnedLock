@@ -5,9 +5,11 @@ import android.os.Bundle;
 import android.os.SystemClock;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Switch;
 
 public class SettingsFragment extends Fragment {
@@ -19,6 +21,10 @@ public class SettingsFragment extends Fragment {
     private Switch Switch_Hours;
     private Switch Switch_Minutes;
     private Switch Switch_Seconds;
+    private Button Button_DefaultPassword;
+    private Button Button_AlternatePassword;
+
+    private boolean Clicked = false;
 
     private MyTimerTask MyTimerTask = new MyTimerTask();
 
@@ -35,6 +41,8 @@ public class SettingsFragment extends Fragment {
         Switch_Hours = (Switch) view.findViewById(R.id.Switch_Hours);
         Switch_Minutes = (Switch) view.findViewById(R.id.Switch_Minutes);
         Switch_Seconds = (Switch) view.findViewById(R.id.Switch_Seconds);
+        Button_DefaultPassword = (Button) view.findViewById(R.id.Button_DefaultPassword);
+        Button_AlternatePassword = (Button) view.findViewById(R.id.Button_AlternatePassword);
 /////////////////////////////////////////////////////////////////////////////
         Switch_12h.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -43,6 +51,7 @@ public class SettingsFragment extends Fragment {
                     settingsResource.setSwitch_12h(true);
                     settingsResource.setSwitch_24h(false);
                 }
+            Clicked = true;
             }
         });
 /////////////////////////////////////////////////////////////////////////////
@@ -53,6 +62,7 @@ public class SettingsFragment extends Fragment {
                     settingsResource.setSwitch_24h(true);
                     settingsResource.setSwitch_12h(false);
                 }
+            Clicked = true;
             }
         });
 /////////////////////////////////////////////////////////////////////////////
@@ -63,6 +73,7 @@ public class SettingsFragment extends Fragment {
                     settingsResource.setSwitch_Reverse(true);
                 else
                     settingsResource.setSwitch_Reverse(false);
+            Clicked = true;
             }
         });
 /////////////////////////////////////////////////////////////////////////////
@@ -78,6 +89,7 @@ public class SettingsFragment extends Fragment {
                     ft.commit();
                 } else
                     settingsResource.setSwitch_Hours(false);
+            Clicked = true;
             }
         });
 /////////////////////////////////////////////////////////////////////////////
@@ -93,7 +105,7 @@ public class SettingsFragment extends Fragment {
                     ft.commit();
                 } else
                     settingsResource.setSwitch_Minutes(false);
-
+            Clicked = true;
             }
         });
 /////////////////////////////////////////////////////////////////////////////
@@ -109,6 +121,29 @@ public class SettingsFragment extends Fragment {
                     ft.commit();
                 } else
                     settingsResource.setSwitch_Seconds(false);
+            Clicked = true;
+            }
+        });
+/////////////////////////////////////////////////////////////////////////////
+        Button_DefaultPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick (View v) {
+                ChangingPasswordsFragment fragment = new ChangingPasswordsFragment("Default");
+                FragmentTransaction ft = (getActivity()).getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.content, fragment);
+                ft.addToBackStack(null);
+                ft.commit();
+            }
+        });
+/////////////////////////////////////////////////////////////////////////////
+        Button_AlternatePassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ChangingPasswordsFragment fragment = new ChangingPasswordsFragment("Alternate");
+                FragmentTransaction ft = (getActivity()).getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.content, fragment);
+                ft.addToBackStack(null);
+                ft.commit();
             }
         });
 /////////////////////////////////////////////////////////////////////////////
@@ -121,7 +156,10 @@ public class SettingsFragment extends Fragment {
         @Override
         protected void onProgressUpdate(Void... values) {
             inWork = true;
-            CreateView();
+                if (Clicked) {
+                    CreateView();
+                    Clicked = false;
+                }
         }
 
         @Override

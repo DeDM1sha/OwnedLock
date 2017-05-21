@@ -1,10 +1,12 @@
 package com.example.owned.ownedlock;
 
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -70,11 +72,11 @@ public class PreviewFragment extends Fragment implements View.OnClickListener {
                         Password = Password + Massive[i];
                 PasswordView.setText(Password);
             }
-            else if (Password.length() == 4){
-                Password = "";
-                PasswordView.setTextColor(Color.WHITE);
-            }
             else {
+                    if (Password.length() == 4){
+                        Password = "";
+                        PasswordView.setTextColor(Color.WHITE);
+                    }
                 Password += button.getText();
                 PasswordView.setText(Password);
                     if (Password.length() == 4) {
@@ -149,4 +151,5 @@ public class PreviewFragment extends Fragment implements View.OnClickListener {
         MyTimerTask = new MyTimerTask();
         MyTimerTask.execute();
     }
+
 }

@@ -21,7 +21,15 @@
             android:text="Настройки"
             android:textAlignment="center"
             android:textColor="#ffffff"
-            android:textSize="25sp" />
+            android:textSize="25sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/Line"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/Title"
+            android:background="@color/white" />
 
         <ScrollView
             android:layout_width="match_parent"
@@ -43,20 +51,16 @@
                     android:textColor="@color/white"
                     android:textSize="@dimen/section_size" />
 
-                <TextView
-                    android:id="@+id/Line"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/white" />
 
                 <TextView
                     android:id="@+id/Pin_12h"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
                     android:layout_below="@id/TimeFormat"
                     android:layout_marginLeft="40dp"
                     android:layout_marginTop="15dp"
-                    android:text="12-ти часовой"/>
+                    android:text="12-ти часовой" />
 
                 <TextView
                     android:id="@+id/Pin_24h"
@@ -72,25 +76,26 @@
                     android:id="@+id/Switch_12h"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="70dp"
+                    android:layout_alignLeft="@+id/Pin_12h"
                     android:layout_below="@+id/Pin_12h"
+                    android:layout_marginLeft="30dp"
                     android:layout_marginTop="30dp" />
 
                 <Switch
                     android:id="@+id/Switch_24h"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignEnd="@+id/Pin_24h"
+                    android:layout_alignRight="@+id/Pin_24h"
                     android:layout_below="@+id/Pin_24h"
-                    android:layout_marginTop="30dp"
-                    android:layout_marginRight="30dp"/>
+                    android:layout_marginRight="30dp"
+                    android:layout_marginTop="30dp" />
 
                 <TextView
                     android:id="@+id/Modifications"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/Switch_12h"
-                    android:layout_marginTop="30dp"
+                    android:layout_marginTop="@dimen/margin_top_title"
                     android:text="Модификации пароля"
                     android:textColor="@color/white"
                     android:textSize="@dimen/section_size" />
@@ -104,7 +109,7 @@
                     android:layout_below="@+id/Modifications"
                     android:layout_marginLeft="12dp"
                     android:layout_marginStart="12dp"
-                    android:layout_marginTop="@dimen/section_size"
+                    android:layout_marginTop="@dimen/margin_top_textview"
                     android:text="Задом наперед" />
 
                 <Switch
@@ -119,28 +124,27 @@
                     android:layout_marginRight="13dp" />
 
                 <TextView
-                android:id="@+id/Text_Hours"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_below="@+id/Text_Reverse"
-                android:layout_marginLeft="12dp"
-                android:layout_marginStart="12dp"
-                android:layout_marginTop="@dimen/margin_top_title"
-                android:text="Часовая настройка" />
+                    android:id="@+id/Text_Hours"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@+id/Text_Reverse"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="@dimen/margin_top_textview"
+                    android:text="Часовая настройка" />
 
                 <Switch
                     android:id="@+id/Switch_Hours"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/Switch_Reverse"
+                    android:layout_alignBaseline="@+id/Text_Hours"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentRight="true"
+                    android:layout_below="@+id/Switch_Reverse"
                     android:layout_marginEnd="13dp"
-                    android:layout_marginRight="13dp"
-                    android:layout_alignBaseline="@+id/Text_Hours"
-                    android:text="Выкл" />
+                    android:layout_marginRight="13dp" />
 
                 <TextView
                     android:id="@+id/Text_Minutes"
@@ -151,20 +155,20 @@
                     android:layout_below="@+id/Text_Hours"
                     android:layout_marginLeft="12dp"
                     android:layout_marginStart="12dp"
-                    android:layout_marginTop="@dimen/margin_top_title"
+                    android:layout_marginTop="@dimen/margin_top_textview"
                     android:text="Минутная настройка" />
 
                 <Switch
                     android:id="@+id/Switch_Minutes"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/Switch_Reverse"
+                    android:layout_alignBaseline="@+id/Text_Minutes"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentRight="true"
+                    android:layout_below="@+id/Switch_Reverse"
                     android:layout_marginEnd="13dp"
-                    android:layout_marginRight="13dp"
-                    android:layout_alignBaseline="@+id/Text_Minutes"
-                    android:text="Выкл" />
+                    android:layout_marginRight="13dp" />
+
                 <TextView
                     android:id="@+id/Text_Seconds"
                     android:layout_width="wrap_content"
@@ -174,20 +178,49 @@
                     android:layout_below="@+id/Text_Minutes"
                     android:layout_marginLeft="12dp"
                     android:layout_marginStart="12dp"
-                    android:layout_marginTop="@dimen/margin_top_title"
+                    android:layout_marginTop="@dimen/margin_top_textview"
                     android:text="Секундная настройка" />
 
                 <Switch
                     android:id="@+id/Switch_Seconds"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/Switch_Reverse"
+                    android:layout_alignBaseline="@+id/Text_Seconds"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentRight="true"
+                    android:layout_below="@+id/Switch_Reverse"
                     android:layout_marginEnd="13dp"
-                    android:layout_marginRight="13dp"
-                    android:layout_alignBaseline="@+id/Text_Seconds"
-                    android:text="Выкл" />
+                    android:layout_marginRight="13dp" />
+
+                <TextView
+                    android:id="@+id/Text_ChangePasswords"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@id/Text_Seconds"
+                    android:layout_marginTop="@dimen/margin_top_title"
+                    android:text="Изменение паролей по умолчанию"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/section_size" />
+
+                <Button
+                    android:id="@+id/Button_DefaultPassword"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/Text_ChangePasswords"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="@dimen/margin_top_textview"
+                    android:text="Стартовый" />
+
+                <Button
+                    android:id="@+id/Button_AlternatePassword"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/Button_DefaultPassword"
+                    android:layout_alignBottom="@+id/Button_DefaultPassword"
+                    android:layout_marginLeft="180dp"
+                    android:text="Алтернативный" />
             </RelativeLayout>
         </ScrollView>
     </RelativeLayout>

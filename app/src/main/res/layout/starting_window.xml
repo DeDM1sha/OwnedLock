@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="10dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+    <TextView
+        android:id="@+id/Title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="30dp"
+        android:text="OwnedLock"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        android:textColor="#ffffff"
+        android:textSize="25sp" />
+    <TextView
+        android:id="@+id/Line"
+        android:layout_width="match_parent"
+        android:layout_below="@id/Title"
+        android:layout_height="1dp"
+        android:background="@color/white" />
+    <TextView
+        android:id="@+id/Text_WritePassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:textSize="21sp"
+        android:textStyle="bold"
+        android:text="@string/Welcom"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/Line" />
+    <TextView
+        android:id="@+id/Information_About_Password"
+        android:layout_below="@+id/Text_WritePassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:layout_centerHorizontal="true"/>
+    <EditText
+        android:id="@+id/Password_Field"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="45dp"
+        android:layout_below="@id/Information_About_Password"
+        android:ems="5"
+        android:background="#808080"
+        android:inputType="numberPassword" />
+    <Button
+        android:id="@+id/Enter"
+        android:layout_below="@+id/Password_Field"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:text="Подтвердить"
+        android:visibility="invisible"/>
+    </RelativeLayout>
+</RelativeLayout>
