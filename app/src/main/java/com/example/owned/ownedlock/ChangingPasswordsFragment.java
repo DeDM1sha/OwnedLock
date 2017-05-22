@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import static android.content.Context.MODE_PRIVATE;
+import static android.preference.PreferenceManager.getDefaultSharedPreferences;
 
 
 public class ChangingPasswordsFragment extends Fragment {
@@ -45,10 +46,11 @@ public class ChangingPasswordsFragment extends Fragment {
         Enter = (Button) view.findViewById(R.id.Enter);
         Title = (TextView) view.findViewById(R.id.Title);
 
+        sharedPreferences = getActivity().getSharedPreferences(SAVED_PASSWORD, 0);
+
             if (Type.equals("Default")) {
                 Title.setText("Изменение стартового пароля");
-                sharedPreferences =  (this.getActivity()).getSharedPreferences(SAVED_PASSWORD,MODE_PRIVATE);
-                UserPassword =  sharedPreferences.getString(SAVED_PASSWORD, "");
+                UserPassword = sharedPreferences.getString("TEST", "");
                 Toast.makeText(getActivity(),UserPassword, Toast.LENGTH_SHORT).show();
 
                 Enter.setOnClickListener(new View.OnClickListener() {
@@ -58,8 +60,8 @@ public class ChangingPasswordsFragment extends Fragment {
                                 if (NewPassword.getText().toString().length() > 3) {
                                     if (NewPassword.getText().toString().equals(RepeatPassword.getText().toString())) {
                                         SharedPreferences.Editor editor = sharedPreferences.edit();
-                                        editor.putString(SAVED_PASSWORD, NewPassword.getText().toString());
-                                        editor.commit();
+                                        editor.putString("TEST", NewPassword.getText().toString());
+                                        editor.apply();
                                         Toast.makeText(getActivity(), "Пароль успешно изменен!", Toast.LENGTH_SHORT).show();
                                     }
                                     else

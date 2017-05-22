@@ -1,6 +1,7 @@
 package com.example.owned.ownedlock;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -15,7 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-public class Starting_Window extends Activity{
+public class Starting_Window extends Activity {
 
     private EditText Password_Field;
     private TextView Text_WritePassword;
@@ -39,7 +40,7 @@ public class Starting_Window extends Activity{
         Information_About_Password = (TextView) findViewById(R.id.Information_About_Password);
         Enter = (Button) findViewById(R.id.Enter);
 
-        sharedPreferences = getPreferences(MODE_PRIVATE);
+        sharedPreferences = getSharedPreferences(SAVED_PASSWORD, 0);
         UserPassword = sharedPreferences.getString(SAVED_PASSWORD, "");
 
             if (UserPassword.length() == 0) {
@@ -63,10 +64,9 @@ public class Starting_Window extends Activity{
                             if (Password_Field.getText().toString().length() < 4)
                                 Toast.makeText(getApplicationContext(), "Пароль должен содержать более 3-ех цифр", Toast.LENGTH_SHORT).show();
                             else {
-                                sharedPreferences = getPreferences(MODE_PRIVATE);
                                 SharedPreferences.Editor editor = sharedPreferences.edit();
-                                editor.putString(SAVED_PASSWORD, Password_Field.getText().toString());
-                                editor.commit();
+                                editor.putString("TEST", Password_Field.getText().toString());
+                                editor.apply();
                                 Toast.makeText(getApplicationContext(), "Пароль успешно сохранен", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(Starting_Window.this, MainActivity.class);
                                 startActivity(intent);

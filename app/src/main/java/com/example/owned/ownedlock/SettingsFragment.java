@@ -1,5 +1,6 @@
 package com.example.owned.ownedlock;
 
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.SystemClock;
@@ -11,6 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Switch;
+
+import static android.content.Context.MODE_PRIVATE;
 
 public class SettingsFragment extends Fragment {
 
@@ -43,6 +46,9 @@ public class SettingsFragment extends Fragment {
         Switch_Seconds = (Switch) view.findViewById(R.id.Switch_Seconds);
         Button_DefaultPassword = (Button) view.findViewById(R.id.Button_DefaultPassword);
         Button_AlternatePassword = (Button) view.findViewById(R.id.Button_AlternatePassword);
+
+
+
 /////////////////////////////////////////////////////////////////////////////
         Switch_12h.setOnClickListener(new View.OnClickListener() {
             @Override

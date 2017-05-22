@@ -1,5 +1,6 @@
 package com.example.owned.ownedlock;
 
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -10,6 +11,7 @@ import android.view.MenuItem;
 
 public class MainActivity extends AppCompatActivity {
 
+    public final String SAVED_PASSWORD = "PASSWORD";
     private PreviewFragment PreveiwFragment;
     private InfoFragment InfoFragment;
     private SettingsFragment SettingsFragment;
@@ -53,6 +55,23 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         navigation.setSelectedItemId(R.id.navigation_preview);
+
+//        SharedPreferences sharedPreferences = this.getSharedPreferences(SAVED_PASSWORD, 0);
+//        SharedPreferences.Editor editor = sharedPreferences.edit();
+//        editor.putString("TEST", "Hugant");
+//        editor.apply();
     }
 
+
+    public void setPreferencePassword(String key, String password) {
+        SharedPreferences sharedPreferences = getPreferences(MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(key, password);
+        editor.apply();
+    }
+
+    public String getPreferencePassword(String key) {
+        SharedPreferences sharedPreferences = getPreferences(MODE_PRIVATE);
+        return sharedPreferences.getString(key, "");
+    }
 }
