@@ -64,7 +64,6 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="40dp"
-        android:text="Подтвердить"
-        android:visibility="invisible"/>
+        android:text="Продолжить"/>
     </RelativeLayout>
 </RelativeLayout>

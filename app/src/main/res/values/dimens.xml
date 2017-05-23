@@ -1,7 +1,7 @@
 <resources>
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
-    <dimen name="margin_top_title">30dp</dimen>
-    <dimen name="margin_top_textview">25dp</dimen>
+    <dimen name="margin_top_title">29dp</dimen>
+    <dimen name="margin_top_object">20dp</dimen>
     <dimen name="section_size">18sp</dimen>
 </resources>

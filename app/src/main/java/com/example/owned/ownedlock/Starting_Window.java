@@ -1,7 +1,6 @@
 package com.example.owned.ownedlock;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -15,11 +14,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
 public class Starting_Window extends Activity {
 
     private EditText Password_Field;
-    private TextView Text_WritePassword;
     private TextView Information_About_Password;
     private Button Enter;
 
@@ -36,11 +33,10 @@ public class Starting_Window extends Activity {
         setContentView(R.layout.starting_window);
 
         Password_Field = (EditText) findViewById(R.id.Password_Field);
-        Text_WritePassword = (TextView) findViewById(R.id.Text_WritePassword);
         Information_About_Password = (TextView) findViewById(R.id.Information_About_Password);
         Enter = (Button) findViewById(R.id.Enter);
 
-        sharedPreferences = getSharedPreferences(SAVED_PASSWORD, 0);
+        sharedPreferences = getSharedPreferences(SAVED_PASSWORD, MODE_PRIVATE);
         UserPassword = sharedPreferences.getString(SAVED_PASSWORD, "");
 
             if (UserPassword.length() == 0) {
@@ -48,7 +44,7 @@ public class Starting_Window extends Activity {
                 Enter.setVisibility(1);
             }
             else
-                Information_About_Password.setText("Введите пароль для входа");
+                Information_About_Password.setText(R.string.enter_the_password);
     }
 
     class MyTimerTask extends AsyncTask<Void, Void, Void> {
@@ -62,21 +58,30 @@ public class Starting_Window extends Activity {
                         @Override
                         public void onClick(View v) {
                             if (Password_Field.getText().toString().length() < 4)
-                                Toast.makeText(getApplicationContext(), "Пароль должен содержать более 3-ех цифр", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(), "Новый пароль должен содержать более 3-ех цифр", Toast.LENGTH_SHORT).show();
                             else {
                                 SharedPreferences.Editor editor = sharedPreferences.edit();
-                                editor.putString("TEST", Password_Field.getText().toString());
+                                editor.putString(SAVED_PASSWORD, Password_Field.getText().toString());
                                 editor.apply();
                                 Toast.makeText(getApplicationContext(), "Пароль успешно сохранен", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(Starting_Window.this, MainActivity.class);
-                                startActivity(intent);
+                                Start_MainActivity();
                             }
                         }
                     });
                 }
-                else if (Password_Field.getText().toString().equals(UserPassword)){
-                    Intent intent = new Intent(Starting_Window.this, MainActivity.class);
-                    startActivity(intent);
+                else {
+                    Enter.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            if (Password_Field.getText().toString().equals(UserPassword)) {
+                                Toast.makeText(getApplicationContext(), "Приветствую Вас", Toast.LENGTH_SHORT).show();
+                                Start_MainActivity();
+                            }
+                            else {
+                                Toast.makeText(getApplicationContext(), "Пароль введён неверно", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
                 }
         }
 
@@ -108,11 +113,17 @@ public class Starting_Window extends Activity {
         MyTimerTask.execute();
     }
 
+    public void Start_MainActivity () {
+        Intent intent = new Intent(Starting_Window.this, MainActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
     @Override // Вопрос пользователю о его желании выйти из приложения
     public void onBackPressed() {
         openQuitDialog();
     }
-    private void openQuitDialog() {
+    public void openQuitDialog() {
         AlertDialog.Builder quitDialog = new AlertDialog.Builder(
                 Starting_Window.this);
         quitDialog.setTitle("Выйти из приложения?");

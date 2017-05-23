@@ -1,6 +1,5 @@
 package com.example.owned.ownedlock;
 
-import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -11,7 +10,6 @@ import android.view.MenuItem;
 
 public class MainActivity extends AppCompatActivity {
 
-    public final String SAVED_PASSWORD = "PASSWORD";
     private PreviewFragment PreveiwFragment;
     private InfoFragment InfoFragment;
     private SettingsFragment SettingsFragment;
@@ -26,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
                 switch (item.getItemId()) {
                     case R.id.navigation_settings:
                         ft.replace(R.id.content, SettingsFragment);
+                        ft.addToBackStack(null);
                         ft.commit();
                         return true;
                     case R.id.navigation_preview:
@@ -35,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
                         return true;
                     case R.id.navigation_info:
                         ft.replace(R.id.content, InfoFragment);
+                        ft.addToBackStack(null);
                         ft.commit();
                         return true;
                 }
@@ -47,7 +47,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         PreveiwFragment = new PreviewFragment(settingsResource);
         InfoFragment = new InfoFragment();
@@ -55,23 +54,5 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         navigation.setSelectedItemId(R.id.navigation_preview);
-
-//        SharedPreferences sharedPreferences = this.getSharedPreferences(SAVED_PASSWORD, 0);
-//        SharedPreferences.Editor editor = sharedPreferences.edit();
-//        editor.putString("TEST", "Hugant");
-//        editor.apply();
-    }
-
-
-    public void setPreferencePassword(String key, String password) {
-        SharedPreferences sharedPreferences = getPreferences(MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(key, password);
-        editor.apply();
-    }
-
-    public String getPreferencePassword(String key) {
-        SharedPreferences sharedPreferences = getPreferences(MODE_PRIVATE);
-        return sharedPreferences.getString(key, "");
     }
 }

@@ -2,6 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/Settings"
     tools:context="com.example.owned.ownedlock.SettingsFragment">
 
     <RelativeLayout
@@ -109,7 +110,7 @@
                     android:layout_below="@+id/Modifications"
                     android:layout_marginLeft="12dp"
                     android:layout_marginStart="12dp"
-                    android:layout_marginTop="@dimen/margin_top_textview"
+                    android:layout_marginTop="@dimen/margin_top_object"
                     android:text="Задом наперед" />
 
                 <Switch
@@ -132,7 +133,7 @@
                     android:layout_below="@+id/Text_Reverse"
                     android:layout_marginLeft="12dp"
                     android:layout_marginStart="12dp"
-                    android:layout_marginTop="@dimen/margin_top_textview"
+                    android:layout_marginTop="@dimen/margin_top_object"
                     android:text="Часовая настройка" />
 
                 <Switch
@@ -155,7 +156,7 @@
                     android:layout_below="@+id/Text_Hours"
                     android:layout_marginLeft="12dp"
                     android:layout_marginStart="12dp"
-                    android:layout_marginTop="@dimen/margin_top_textview"
+                    android:layout_marginTop="@dimen/margin_top_object"
                     android:text="Минутная настройка" />
 
                 <Switch
@@ -178,7 +179,7 @@
                     android:layout_below="@+id/Text_Minutes"
                     android:layout_marginLeft="12dp"
                     android:layout_marginStart="12dp"
-                    android:layout_marginTop="@dimen/margin_top_textview"
+                    android:layout_marginTop="@dimen/margin_top_object"
                     android:text="Секундная настройка" />
 
                 <Switch
@@ -210,7 +211,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/Text_ChangePasswords"
                     android:layout_marginLeft="20dp"
-                    android:layout_marginTop="@dimen/margin_top_textview"
+                    android:layout_marginTop="@dimen/margin_top_object"
                     android:text="Стартовый" />
 
                 <Button

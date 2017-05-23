@@ -5,19 +5,21 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Switch;
+import android.widget.Toast;
 
 import static android.content.Context.MODE_PRIVATE;
 
 public class SettingsFragment extends Fragment {
 
     private SettingsResource settingsResource;
+
     private Switch Switch_12h;
     private Switch Switch_24h;
     private Switch Switch_Reverse;
@@ -46,8 +48,6 @@ public class SettingsFragment extends Fragment {
         Switch_Seconds = (Switch) view.findViewById(R.id.Switch_Seconds);
         Button_DefaultPassword = (Button) view.findViewById(R.id.Button_DefaultPassword);
         Button_AlternatePassword = (Button) view.findViewById(R.id.Button_AlternatePassword);
-
-
 
 /////////////////////////////////////////////////////////////////////////////
         Switch_12h.setOnClickListener(new View.OnClickListener() {
@@ -156,6 +156,7 @@ public class SettingsFragment extends Fragment {
         CreateView();
         return view;
     }
+
     class MyTimerTask extends AsyncTask<Void, Void, Void> {
         boolean inWork = true;
 
