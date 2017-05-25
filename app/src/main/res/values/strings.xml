@@ -2,7 +2,7 @@
     <string name="app_name">OwnedLock</string>
     <string name="title_preview">Просмотр</string>
     <string name="title_settings">Настройки</string>
-    <string name="title_info">Информация</string>
+    <string name="title_info">Запуск</string>
 
     <string name="settings_time_title_hour">Часовая настройка</string>
     <string name="settings_time_title_minute">Минутная настройка</string>
