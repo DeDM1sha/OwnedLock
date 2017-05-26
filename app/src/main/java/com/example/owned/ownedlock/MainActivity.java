@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         PreveiwFragment = new PreviewFragment(settingsResource);
         LaunchLockScreen_Fragment = new LaunchLockScreen_Fragment();
-        SettingsFragment = new SettingsFragment();
+        SettingsFragment = new SettingsFragment(settingsResource);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         navigation.setSelectedItemId(R.id.navigation_preview);

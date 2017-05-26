@@ -3,6 +3,7 @@ package com.example.owned.ownedlock;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -16,7 +17,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
 
 /**
@@ -37,7 +37,20 @@ public class LockScreenActivity extends Activity implements View.OnClickListener
     private String TimeCode = "";
     private boolean Clicked = false;
 
-   // private SettingsResource settingsResource;
+    private final String FORMAT = "FORMAT";
+    private final String REVERSE = "REVERSE";
+    private final String HOURS = "HOURS";
+    private final String MINUTES = "MINUTES";
+    private final String SECONDS = "SECONDS";
+    private final String ALTERNATE_PASSWORD = "ALNERNATE_PASSWORD";
+    private String Format;
+    private String Reverse;
+    private String Hours;
+    private String Minutes;
+    private String Seconds;
+    private String AlternatePassword;
+
+    SharedPreferences sharedPreferences;
 
     private LockScreenActivity.MyTimerTask MyTimerTask = new LockScreenActivity.MyTimerTask();
 
@@ -54,6 +67,25 @@ public class LockScreenActivity extends Activity implements View.OnClickListener
 //                WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         setContentView(R.layout.activity_lock_screen);
+
+
+        sharedPreferences = getSharedPreferences(FORMAT, Context.MODE_PRIVATE);
+        Format = sharedPreferences.getString(FORMAT, "");
+
+        sharedPreferences = getSharedPreferences(REVERSE, Context.MODE_PRIVATE);
+        Reverse =  sharedPreferences.getString(REVERSE, "");
+
+        sharedPreferences = getSharedPreferences(HOURS, Context.MODE_PRIVATE);
+        Hours = sharedPreferences.getString(HOURS, "");
+
+        sharedPreferences = getSharedPreferences(MINUTES, Context.MODE_PRIVATE);
+        Minutes = sharedPreferences.getString(MINUTES, "");
+
+        sharedPreferences = getSharedPreferences(SECONDS, Context.MODE_PRIVATE);
+        Seconds = sharedPreferences.getString(SECONDS, "");
+
+        sharedPreferences = getSharedPreferences(ALTERNATE_PASSWORD, Context.MODE_PRIVATE);
+        AlternatePassword = sharedPreferences.getString(ALTERNATE_PASSWORD, "");
 
         isLocked = true;
 
@@ -74,7 +106,6 @@ public class LockScreenActivity extends Activity implements View.OnClickListener
             buttons[i].setOnClickListener(this);
         DeleteButton.setOnClickListener(this);
         TimeView.setText(getTime());
-
 
         try {
             startService(new Intent(this, LockScreenService.class));
@@ -97,19 +128,42 @@ public class LockScreenActivity extends Activity implements View.OnClickListener
             PasswordView.setText(Password);
         }
         else {
-            if (Password.length() == 4){
-                Password = "";
-                PasswordView.setTextColor(Color.WHITE);
+            if (Seconds.equals("ON")) {
+                if (Password.length() == 6) {
+                    Password = "";
+                    PasswordView.setTextColor(Color.WHITE);
+                }
+            }
+            else {
+                if (Password.length() == 4) {
+                    Password = "";
+                    PasswordView.setTextColor(Color.WHITE);
+                }
             }
             Password += button.getText();
             PasswordView.setText(Password);
-            if (Password.length() == 4) {
-                if (Password.equals(TimeCode)) {
-                    Toast.makeText(this, "Пароль верный!", Toast.LENGTH_LONG).show();
-                    PasswordView.setTextColor(Color.GREEN);
-                } else {
-                    Toast.makeText(this, "Неверный пароль!", Toast.LENGTH_LONG).show();
-                    PasswordView.setTextColor(Color.RED);
+            if (Seconds.equals("ON")) {
+                    if (Password.length() == 6) {
+                        if (Password.equals(TimeCode) || (AlternatePassword.length() > 3 && AlternatePassword.equals(Password))) {
+                            virbate();
+                            isLocked = false;
+                            finish();
+                        } else {
+                            Toast.makeText(this, "Неверный пароль!", Toast.LENGTH_LONG).show();
+                            PasswordView.setTextColor(Color.RED);
+                        }
+                    }
+            }
+            else {
+                if (Password.length() == 4) {
+                    if (Password.equals(TimeCode) || (AlternatePassword.length() > 3 && AlternatePassword.equals(Password))) {
+                        virbate();
+                        isLocked = false;
+                        finish();
+                    } else {
+                        Toast.makeText(this, "Неверный пароль!", Toast.LENGTH_LONG).show();
+                        PasswordView.setTextColor(Color.RED);
+                    }
                 }
             }
         }
@@ -142,24 +196,59 @@ public class LockScreenActivity extends Activity implements View.OnClickListener
             inWork = false;
         }
     }
-
+boolean a = false;
     private String getTime() {
-//        if (settingsResource.isSwitch_12h())
-//            Time = String.valueOf(new SimpleDateFormat("hh:mm:ss").format(new Date(new Date().getTime())));
-        //else {
-            Time = String.valueOf(new SimpleDateFormat("kk:mm:ss").format(new Date(new Date().getTime())));
-            char[] chArray = Time.toCharArray();
-            if (chArray[0] == '2' && chArray[1] == '4') {
-                chArray[0] = '0';
-                chArray[1] = '0';
-            } // функция SimpleDateFormat показывает часы в формате 1-24, здесь производится замена числа 24 на 00
-            Time = "" + chArray[0] + chArray[1] + ":" + chArray[3] + chArray[4] + ":" + chArray[6] + chArray[7];
-       // }
-        //char[] chArray = Time.toCharArray();
-        TimeCode = "" + chArray[0] + chArray[1] + chArray[3] + chArray[4];
-//        if (settingsResource.isSwitch_Reverse()){
-//            TimeCode = "" + chArray[4] + chArray[3] + chArray[1] + chArray[0];
-//        }
+            if (Format.equals("12h"))
+                Time = String.valueOf(new SimpleDateFormat("hh:mm:ss").format(new java.util.Date(new java.util.Date().getTime())));
+            else
+                Time = String.valueOf(new SimpleDateFormat("kk:mm:ss").format(new java.util.Date(new java.util.Date().getTime())));
+        char[] chArray = Time.toCharArray();
+                if (chArray[0] == '2' && chArray[1] == '4') {
+                    chArray[0] = '0';
+                    chArray[1] = '0';
+                } // функция SimpleDateFormat показывает часы в формате 1-24, здесь производится замена числа 24 на 00
+//                if (Hours.equals("ON")) {
+//                    if (chArray[1] == '9') {
+//                        chArray[0] = '1';
+//                        chArray[1] = '0';
+//                    }
+//                    if (chArray[0] == '1') {
+//                        chArray[0] = '1';
+//                        chArray[1] = '1';
+//                    }
+//                    if (chArray[1] == '1') {
+//                        chArray[0] = '1';
+//                        chArray[1] = '2';
+//                    }
+//                    if (chArray[1] == '8')
+//                        chArray[1] =  '9';
+//                    if (chArray[1] == '7')
+//                        chArray[1] = '8';
+//                    if (chArray[1] == '6')
+//                        chArray[1] = '7';
+//                    if (chArray[1] == '5')
+//                        chArray[1] = '6';
+//                    if (chArray[1] == '4')
+//                        chArray[0] = '3';
+//
+//                    if (chArray[1] == '3')
+//                        chArray[1] = '4';
+//                    if (chArray[1] == '2')
+//                        chArray[1] = '3';
+//                    if (chArray[1] == '1')
+//                        chArray[1] = '2';
+//                }
+                if (Reverse.equals("ON"))
+                    TimeCode = "" + chArray[4] + chArray[3] + chArray[1] + chArray[0];
+                 else
+                    TimeCode = "" + chArray[0] + chArray[1] + chArray[3] + chArray[4];
+                if (Seconds.equals("ON")) {
+                    TimeCode = "" + chArray[0] + chArray[1] + chArray[3] + chArray[4] + chArray[6] + chArray[7];
+                        if (Reverse.equals("ON"))
+                            TimeCode = "" + chArray[7] + chArray[6] + chArray[4] + chArray[3] + chArray[1] + chArray[0];
+                }
+
+        Time = "" + chArray[0] + chArray[1] + ":" + chArray[3] + chArray[4] + ":" + chArray[6] + chArray[7];
         return Time;
     }
 
@@ -167,9 +256,6 @@ public class LockScreenActivity extends Activity implements View.OnClickListener
     protected void onPause() {
         super.onPause();
         MyTimerTask.stop();
-        Intent intent = new Intent();
-        intent.setClass(LockScreenActivity.this, LockScreenActivity.class);
-        super.startActivity(intent);
     }
 
     @Override
@@ -189,8 +275,9 @@ public class LockScreenActivity extends Activity implements View.OnClickListener
 
     @Override
     protected void onUserLeaveHint() {
-        Toast toast = Toast.makeText(getApplicationContext(), "Нажата кнопка HOME", Toast.LENGTH_SHORT);
-        toast.show();
+        Intent intent = new Intent();
+        intent.setClass(LockScreenActivity.this, LockScreenActivity.class);
+        super.startActivity(intent);
     }
 
     @Override

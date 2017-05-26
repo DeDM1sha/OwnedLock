@@ -50,8 +50,8 @@ public class PreviewFragment extends Fragment implements View.OnClickListener {
         buttons[8] = (Button) view.findViewById(R.id.Button_8);
         buttons[9] = (Button) view.findViewById(R.id.Button_9);
         DeleteButton = (Button) view.findViewById(R.id.Button_Delete);
-            for (short i = 0; i < 10; i++)
-                buttons[i].setOnClickListener(this);
+        for (short i = 0; i < 10; i++)
+            buttons[i].setOnClickListener(this);
         DeleteButton.setOnClickListener(this);
         TimeView.setText(getTime());
         return view;
@@ -60,33 +60,33 @@ public class PreviewFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         Button button = (Button) v;
-            if (button.getText().equals("delete")) {
-                    if (Password.length() == 4)
-                        PasswordView.setTextColor(Color.WHITE);
-                char [] Massive = Password.toCharArray();
-                short C = (short) Password.length();
+        if (button.getText().equals("delete")) {
+            if (Password.length() == 4)
+                PasswordView.setTextColor(Color.WHITE);
+            char [] Massive = Password.toCharArray();
+            short C = (short) Password.length();
+            Password = "";
+            for (short i = 0; i < C-1; i++)
+                Password = Password + Massive[i];
+            PasswordView.setText(Password);
+        }
+        else {
+            if (Password.length() == 4){
                 Password = "";
-                    for (short i = 0; i < C-1; i++)
-                        Password = Password + Massive[i];
-                PasswordView.setText(Password);
+                PasswordView.setTextColor(Color.WHITE);
             }
-            else {
-                    if (Password.length() == 4){
-                        Password = "";
-                        PasswordView.setTextColor(Color.WHITE);
-                    }
-                Password += button.getText();
-                PasswordView.setText(Password);
-                    if (Password.length() == 4) {
-                        if (Password.equals(TimeCode)) {
-                            Toast.makeText(getActivity(), "Пароль верный!", Toast.LENGTH_LONG).show();
-                            PasswordView.setTextColor(Color.GREEN);
-                        } else {
-                            Toast.makeText(getActivity(), "Неверный пароль!", Toast.LENGTH_LONG).show();
-                            PasswordView.setTextColor(Color.RED);
-                        }
-                    }
+            Password += button.getText();
+            PasswordView.setText(Password);
+            if (Password.length() == 4) {
+                if (Password.equals(TimeCode)) {
+                    Toast.makeText(getActivity(), "Пароль верный!", Toast.LENGTH_LONG).show();
+                    PasswordView.setTextColor(Color.GREEN);
+                } else {
+                    Toast.makeText(getActivity(), "Неверный пароль!", Toast.LENGTH_LONG).show();
+                    PasswordView.setTextColor(Color.RED);
+                }
             }
+        }
         Clicked = true;
     }
 
@@ -97,10 +97,10 @@ public class PreviewFragment extends Fragment implements View.OnClickListener {
         protected void onProgressUpdate(Void... values) {
             inWork = true;
             TimeView.setText(getTime());
-                if (Clicked) {
-                    PasswordView.setText(Password);
-                    Clicked = false;
-                }
+            if (Clicked) {
+                PasswordView.setText(Password);
+                Clicked = false;
+            }
         }
 
         @Override
@@ -118,22 +118,22 @@ public class PreviewFragment extends Fragment implements View.OnClickListener {
     }
 
     private String getTime() {
-            if (settingsResource.isSwitch_12h())
-                Time = String.valueOf(new SimpleDateFormat("hh:mm:ss").format(new Date(new Date().getTime())));
-            else {
-                Time = String.valueOf(new SimpleDateFormat("kk:mm:ss").format(new Date(new Date().getTime())));
-                char[] chArray = Time.toCharArray();
-                    if (chArray[0] == '2' && chArray[1] == '4') {
-                        chArray[0] = '0';
-                        chArray[1] = '0';
-                    } // функция SimpleDateFormat показывает часы в формате 1-24, здесь производится замена числа 24 на 00
-                Time = "" + chArray[0] + chArray[1] + ":" + chArray[3] + chArray[4] + ":" + chArray[6] + chArray[7];
-            }
+        if (settingsResource.isSwitch_12h())
+            Time = String.valueOf(new SimpleDateFormat("hh:mm:ss").format(new Date(new Date().getTime())));
+        else {
+            Time = String.valueOf(new SimpleDateFormat("kk:mm:ss").format(new Date(new Date().getTime())));
+            char[] chArray = Time.toCharArray();
+            if (chArray[0] == '2' && chArray[1] == '4') {
+                chArray[0] = '0';
+                chArray[1] = '0';
+            } // функция SimpleDateFormat показывает часы в формате 1-24, здесь производится замена числа 24 на 00
+            Time = "" + chArray[0] + chArray[1] + ":" + chArray[3] + chArray[4] + ":" + chArray[6] + chArray[7];
+        }
         char[] chArray = Time.toCharArray();
         TimeCode = "" + chArray[0] + chArray[1] + chArray[3] + chArray[4];
-                if (settingsResource.isSwitch_Reverse()){
-                    TimeCode = "" + chArray[4] + chArray[3] + chArray[1] + chArray[0];
-            }
+        if (settingsResource.isSwitch_Reverse()){
+            TimeCode = "" + chArray[4] + chArray[3] + chArray[1] + chArray[0];
+        }
         return Time;
     }
 

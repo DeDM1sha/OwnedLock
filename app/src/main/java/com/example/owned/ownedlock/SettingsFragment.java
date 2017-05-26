@@ -15,8 +15,6 @@ import android.widget.Switch;
 
 public class SettingsFragment extends Fragment {
 
-
-
     private Switch Switch_12h;
     private Switch Switch_24h;
     private Switch Switch_Reverse;
@@ -42,7 +40,11 @@ public class SettingsFragment extends Fragment {
 
     private MyTimerTask MyTimerTask = new MyTimerTask();
 
+    SettingsResource settingsResource;
 
+    public SettingsFragment(SettingsResource settingsResource) {
+        this.settingsResource = settingsResource;
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, final Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_settings, container, false);
@@ -79,6 +81,8 @@ public class SettingsFragment extends Fragment {
                     Format = "12h";
                     editor.putString(FORMAT, Format);
                     editor.apply();
+                    settingsResource.setSwitch_12h(true);
+                    settingsResource.setSwitch_24h(false);
                 }
                 Clicked = true;
             }
@@ -93,6 +97,8 @@ public class SettingsFragment extends Fragment {
                     Format = "24h";
                     editor.putString(FORMAT, Format);
                     editor.apply();
+                    settingsResource.setSwitch_24h(true);
+                    settingsResource.setSwitch_12h(false);
                 }
                 Clicked = true;
             }
@@ -107,6 +113,7 @@ public class SettingsFragment extends Fragment {
                     Reverse = "ON";
                     editor.putString(REVERSE, Reverse);
                     editor.apply();
+                    settingsResource.setSwitch_Reverse(true);
                 }
                 else {
                     sharedPreferences = getActivity().getSharedPreferences(REVERSE, Context.MODE_PRIVATE);
@@ -114,6 +121,7 @@ public class SettingsFragment extends Fragment {
                     Reverse = "OFF";
                     editor.putString(REVERSE, Reverse);
                     editor.apply();
+                    settingsResource.setSwitch_Reverse(false);
                 }
                 Clicked = true;
             }
@@ -123,6 +131,7 @@ public class SettingsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (Switch_Hours.isChecked()) {
+                    settingsResource.setSwitch_Hours(true);
                     sharedPreferences = getActivity().getSharedPreferences(HOURS, Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     Hours = "ON";
@@ -140,6 +149,7 @@ public class SettingsFragment extends Fragment {
                     Hours = "OFF";
                     editor.putString(HOURS, Hours);
                     editor.apply();
+                    settingsResource.setSwitch_Hours(false);
                 }
                 Clicked = true;
             }
@@ -149,6 +159,7 @@ public class SettingsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (Switch_Minutes.isChecked()) {
+                    settingsResource.setSwitch_Minutes(true);
                     sharedPreferences = getActivity().getSharedPreferences(MINUTES, Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     Minutes = "ON";
@@ -166,6 +177,7 @@ public class SettingsFragment extends Fragment {
                     Minutes = "OFF";
                     editor.putString(MINUTES, Minutes);
                     editor.apply();
+                    settingsResource.setSwitch_Minutes(false);
                 }
                 Clicked = true;
             }
@@ -175,6 +187,7 @@ public class SettingsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (Switch_Seconds.isChecked()) {
+                    settingsResource.setSwitch_Seconds(true);
                     sharedPreferences = getActivity().getSharedPreferences(SECONDS, Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     Seconds = "ON";
@@ -191,6 +204,7 @@ public class SettingsFragment extends Fragment {
                     Seconds = "OFF";
                     editor.putString(SECONDS, Seconds);
                     editor.apply();
+                    settingsResource.setSwitch_Seconds(false);
                 }
                 Clicked = true;
             }

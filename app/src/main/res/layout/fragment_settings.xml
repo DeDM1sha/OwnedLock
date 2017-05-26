@@ -134,7 +134,7 @@
                     android:layout_marginLeft="12dp"
                     android:layout_marginStart="12dp"
                     android:layout_marginTop="@dimen/margin_top_object"
-                    android:text="+2 часа к паролю" />
+                    android:text="+1 час к паролю" />
 
                 <Switch
                     android:id="@+id/Switch_Hours"

@@ -14,7 +14,7 @@ public class Start_LOCK_SCREEN extends Activity {
         Intent intent = new Intent();
         intent.setClass(Start_LOCK_SCREEN.this, LockScreenService.class);
         startService(intent);
-        Toast.makeText(Start_LOCK_SCREEN.this, "GO!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(Start_LOCK_SCREEN.this, "Блокировка включена", Toast.LENGTH_SHORT).show();
         finish();
 
     }
