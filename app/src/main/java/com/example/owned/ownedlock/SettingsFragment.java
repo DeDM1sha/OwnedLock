@@ -1,24 +1,21 @@
 package com.example.owned.ownedlock;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Switch;
-import android.widget.Toast;
-
-import static android.content.Context.MODE_PRIVATE;
 
 public class SettingsFragment extends Fragment {
 
-    private SettingsResource settingsResource;
+
 
     private Switch Switch_12h;
     private Switch Switch_24h;
@@ -30,12 +27,21 @@ public class SettingsFragment extends Fragment {
     private Button Button_AlternatePassword;
 
     private boolean Clicked = false;
+    private final String FORMAT = "FORMAT";
+    private final String REVERSE = "REVERSE";
+    private final String HOURS = "HOURS";
+    private final String MINUTES = "MINUTES";
+    private final String SECONDS = "SECONDS";
+    private String Format;
+    private String Reverse;
+    private String Hours;
+    private String Minutes;
+    private String Seconds;
+
+    SharedPreferences sharedPreferences;
 
     private MyTimerTask MyTimerTask = new MyTimerTask();
 
-    public SettingsFragment(SettingsResource settingsResource) {
-        this.settingsResource = settingsResource;
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, final Bundle savedInstanceState) {
@@ -49,15 +55,32 @@ public class SettingsFragment extends Fragment {
         Button_DefaultPassword = (Button) view.findViewById(R.id.Button_DefaultPassword);
         Button_AlternatePassword = (Button) view.findViewById(R.id.Button_AlternatePassword);
 
+        sharedPreferences = getActivity().getSharedPreferences(FORMAT, Context.MODE_PRIVATE);
+        Format = sharedPreferences.getString(FORMAT, "");
+
+        sharedPreferences = getActivity().getSharedPreferences(REVERSE, Context.MODE_PRIVATE);
+        Reverse = sharedPreferences.getString(REVERSE, "");
+
+        sharedPreferences = getActivity().getSharedPreferences(HOURS, Context.MODE_PRIVATE);
+        Hours = sharedPreferences.getString(HOURS, "");
+
+        sharedPreferences = getActivity().getSharedPreferences(MINUTES, Context.MODE_PRIVATE);
+        Minutes = sharedPreferences.getString(MINUTES, "");
+
+        sharedPreferences = getActivity().getSharedPreferences(SECONDS, Context.MODE_PRIVATE);
+        Seconds = sharedPreferences.getString(SECONDS, "");
 /////////////////////////////////////////////////////////////////////////////
         Switch_12h.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View e) {
                 if (Switch_12h.isChecked()) {
-                    settingsResource.setSwitch_12h(true);
-                    settingsResource.setSwitch_24h(false);
+                    sharedPreferences = getActivity().getSharedPreferences(FORMAT, Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    Format = "12h";
+                    editor.putString(FORMAT, Format);
+                    editor.apply();
                 }
-            Clicked = true;
+                Clicked = true;
             }
         });
 /////////////////////////////////////////////////////////////////////////////
@@ -65,21 +88,34 @@ public class SettingsFragment extends Fragment {
             @Override
             public void onClick(View e) {
                 if (Switch_24h.isChecked()) {
-                    settingsResource.setSwitch_24h(true);
-                    settingsResource.setSwitch_12h(false);
+                    sharedPreferences = getActivity().getSharedPreferences(FORMAT, Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    Format = "24h";
+                    editor.putString(FORMAT, Format);
+                    editor.apply();
                 }
-            Clicked = true;
+                Clicked = true;
             }
         });
 /////////////////////////////////////////////////////////////////////////////
         Switch_Reverse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View e) {
-                if (Switch_Reverse.isChecked())
-                    settingsResource.setSwitch_Reverse(true);
-                else
-                    settingsResource.setSwitch_Reverse(false);
-            Clicked = true;
+                if (Switch_Reverse.isChecked()) {
+                    sharedPreferences = getActivity().getSharedPreferences(REVERSE, Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    Reverse = "ON";
+                    editor.putString(REVERSE, Reverse);
+                    editor.apply();
+                }
+                else {
+                    sharedPreferences = getActivity().getSharedPreferences(REVERSE, Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    Reverse = "OFF";
+                    editor.putString(REVERSE, Reverse);
+                    editor.apply();
+                }
+                Clicked = true;
             }
         });
 /////////////////////////////////////////////////////////////////////////////
@@ -87,15 +123,25 @@ public class SettingsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (Switch_Hours.isChecked()) {
-                    settingsResource.setSwitch_Hours(true);
-                    TimeSettingsFragment fragment = new TimeSettingsFragment(TimeSettingsFragment.HOUR, settingsResource);
-                    FragmentTransaction ft = (getActivity()).getSupportFragmentManager().beginTransaction();
-                    ft.replace(R.id.content, fragment);
-                    ft.addToBackStack(null);
-                    ft.commit();
-                } else
-                    settingsResource.setSwitch_Hours(false);
-            Clicked = true;
+                    sharedPreferences = getActivity().getSharedPreferences(HOURS, Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    Hours = "ON";
+                    editor.putString(HOURS, Hours);
+                    editor.apply();
+//                    TimeSettingsFragment fragment = new TimeSettingsFragment(TimeSettingsFragment.HOUR, settingsResource);
+//                    FragmentTransaction ft = (getActivity()).getSupportFragmentManager().beginTransaction();
+//                    ft.replace(R.id.content, fragment);
+//                    ft.addToBackStack(null);
+//                    ft.commit();
+                }
+                else {
+                    sharedPreferences = getActivity().getSharedPreferences(HOURS, Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    Hours = "OFF";
+                    editor.putString(HOURS, Hours);
+                    editor.apply();
+                }
+                Clicked = true;
             }
         });
 /////////////////////////////////////////////////////////////////////////////
@@ -103,15 +149,25 @@ public class SettingsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (Switch_Minutes.isChecked()) {
-                    settingsResource.setSwitch_Minutes(true);
-                    TimeSettingsFragment fragment = new TimeSettingsFragment(TimeSettingsFragment.MINUTE, settingsResource);
-                    FragmentTransaction ft = (getActivity()).getSupportFragmentManager().beginTransaction();
-                    ft.replace(R.id.content, fragment);
-                    ft.addToBackStack(null);
-                    ft.commit();
-                } else
-                    settingsResource.setSwitch_Minutes(false);
-            Clicked = true;
+                    sharedPreferences = getActivity().getSharedPreferences(MINUTES, Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    Minutes = "ON";
+                    editor.putString(MINUTES, Minutes);
+                    editor.apply();
+//                    TimeSettingsFragment fragment = new TimeSettingsFragment(TimeSettingsFragment.MINUTE, settingsResource);
+//                    FragmentTransaction ft = (getActivity()).getSupportFragmentManager().beginTransaction();
+//                    ft.replace(R.id.content, fragment);
+//                    ft.addToBackStack(null);
+//                    ft.commit();
+                }
+                else {
+                    sharedPreferences = getActivity().getSharedPreferences(MINUTES, Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    Minutes = "OFF";
+                    editor.putString(MINUTES, Minutes);
+                    editor.apply();
+                }
+                Clicked = true;
             }
         });
 /////////////////////////////////////////////////////////////////////////////
@@ -119,15 +175,24 @@ public class SettingsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (Switch_Seconds.isChecked()) {
-                    settingsResource.setSwitch_Seconds(true);
-                    TimeSettingsFragment fragment = new TimeSettingsFragment(TimeSettingsFragment.SECOND, settingsResource);
-                    FragmentTransaction ft = (getActivity()).getSupportFragmentManager().beginTransaction();
-                    ft.replace(R.id.content, fragment);
-                    ft.addToBackStack(null);
-                    ft.commit();
-                } else
-                    settingsResource.setSwitch_Seconds(false);
-            Clicked = true;
+                    sharedPreferences = getActivity().getSharedPreferences(SECONDS, Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    Seconds = "ON";
+                    editor.putString(SECONDS, Seconds);
+                    editor.apply();
+//                    TimeSettingsFragment fragment = new TimeSettingsFragment(TimeSettingsFragment.SECOND, settingsResource);
+//                    FragmentTransaction ft = (getActivity()).getSupportFragmentManager().beginTransaction();
+//                    ft.replace(R.id.content, fragment);
+//                    ft.addToBackStack(null);
+//                    ft.commit();
+                } else {
+                    sharedPreferences = getActivity().getSharedPreferences(SECONDS, Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    Seconds = "OFF";
+                    editor.putString(SECONDS, Seconds);
+                    editor.apply();
+                }
+                Clicked = true;
             }
         });
 /////////////////////////////////////////////////////////////////////////////
@@ -163,10 +228,10 @@ public class SettingsFragment extends Fragment {
         @Override
         protected void onProgressUpdate(Void... values) {
             inWork = true;
-                if (Clicked) {
-                    CreateView();
-                    Clicked = false;
-                }
+            if (Clicked) {
+                CreateView();
+                Clicked = false;
+            }
         }
 
         @Override
@@ -199,7 +264,7 @@ public class SettingsFragment extends Fragment {
 
     private void CreateView() {
 /////////////////////////////////////////////////////////////////////////////
-        if (settingsResource.isSwitch_12h()) {
+        if (Format.equals("12h")) {
             Switch_12h.setChecked(true);
             Switch_12h.setText(R.string.on);
             Switch_12h.setClickable(false);
@@ -209,7 +274,7 @@ public class SettingsFragment extends Fragment {
             Switch_12h.setClickable(true);
         }
 /////////////////////////////////////////////////////////////////////////////
-        if (settingsResource.isSwitch_24h()) {
+        if (Format.equals("24h") || Format.length() < 2) {
             Switch_24h.setChecked(true);
             Switch_24h.setText(R.string.on);
             Switch_24h.setClickable(false);
@@ -219,15 +284,16 @@ public class SettingsFragment extends Fragment {
             Switch_24h.setClickable(true);
         }
 /////////////////////////////////////////////////////////////////////////////
-        if (settingsResource.isSwitch_Reverse()) {
+        if (Reverse.equals("ON")) {
             Switch_Reverse.setChecked(true);
             Switch_Reverse.setText(R.string.on);
         } else {
             Switch_Reverse.setChecked(false);
             Switch_Reverse.setText(R.string.off);
+
         }
 /////////////////////////////////////////////////////////////////////////////
-        if (settingsResource.isSwitch_Hours()) {
+        if (Hours.equals("ON")) {
             Switch_Hours.setChecked(true);
             Switch_Hours.setText(R.string.on);
         } else {
@@ -235,7 +301,7 @@ public class SettingsFragment extends Fragment {
             Switch_Hours.setText(R.string.off);
         }
 /////////////////////////////////////////////////////////////////////////////
-        if (settingsResource.isSwitch_Minutes()) {
+        if (Minutes.equals("ON")) {
             Switch_Minutes.setChecked(true);
             Switch_Minutes.setText(R.string.on);
         } else {
@@ -243,7 +309,7 @@ public class SettingsFragment extends Fragment {
             Switch_Minutes.setText(R.string.off);
         }
 /////////////////////////////////////////////////////////////////////////////
-        if (settingsResource.isSwitch_Seconds()) {
+        if (Seconds.equals("ON")) {
             Switch_Seconds.setChecked(true);
             Switch_Seconds.setText(R.string.on);
         } else {

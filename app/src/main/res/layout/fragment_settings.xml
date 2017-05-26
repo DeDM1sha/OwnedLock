@@ -134,7 +134,7 @@
                     android:layout_marginLeft="12dp"
                     android:layout_marginStart="12dp"
                     android:layout_marginTop="@dimen/margin_top_object"
-                    android:text="Часовая настройка" />
+                    android:text="+2 часа к паролю" />
 
                 <Switch
                     android:id="@+id/Switch_Hours"
@@ -157,7 +157,7 @@
                     android:layout_marginLeft="12dp"
                     android:layout_marginStart="12dp"
                     android:layout_marginTop="@dimen/margin_top_object"
-                    android:text="Минутная настройка" />
+                    android:text="-5 минут к паролю" />
 
                 <Switch
                     android:id="@+id/Switch_Minutes"
@@ -180,7 +180,7 @@
                     android:layout_marginLeft="12dp"
                     android:layout_marginStart="12dp"
                     android:layout_marginTop="@dimen/margin_top_object"
-                    android:text="Секундная настройка" />
+                    android:text="Использовать секунды" />
 
                 <Switch
                     android:id="@+id/Switch_Seconds"

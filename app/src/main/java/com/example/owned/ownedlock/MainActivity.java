@@ -29,7 +29,6 @@ public class MainActivity extends AppCompatActivity {
                         ft.commit();
                         return true;
                     case R.id.navigation_preview:
-                        PreveiwFragment = new PreviewFragment(settingsResource);
                         ft.replace(R.id.content, PreveiwFragment);
                         ft.commit();
                         return true;
@@ -50,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         PreveiwFragment = new PreviewFragment(settingsResource);
         LaunchLockScreen_Fragment = new LaunchLockScreen_Fragment();
-        SettingsFragment = new SettingsFragment(settingsResource);
+        SettingsFragment = new SettingsFragment();
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         navigation.setSelectedItemId(R.id.navigation_preview);
