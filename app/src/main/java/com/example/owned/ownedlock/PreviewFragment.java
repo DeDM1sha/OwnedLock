@@ -11,8 +11,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class PreviewFragment extends Fragment implements View.OnClickListener {
 
@@ -119,21 +119,25 @@ public class PreviewFragment extends Fragment implements View.OnClickListener {
 
     private String getTime() {
         if (settingsResource.isSwitch_12h())
-            Time = String.valueOf(new SimpleDateFormat("hh:mm:ss").format(new Date(new Date().getTime())));
-        else {
-            Time = String.valueOf(new SimpleDateFormat("kk:mm:ss").format(new Date(new Date().getTime())));
-            char[] chArray = Time.toCharArray();
-            if (chArray[0] == '2' && chArray[1] == '4') {
-                chArray[0] = '0';
-                chArray[1] = '0';
-            } // функция SimpleDateFormat показывает часы в формате 1-24, здесь производится замена числа 24 на 00
-            Time = "" + chArray[0] + chArray[1] + ":" + chArray[3] + chArray[4] + ":" + chArray[6] + chArray[7];
-        }
+            Time = String.valueOf(new SimpleDateFormat("hh:mm:ss").format(new java.util.Date(new java.util.Date().getTime())));
+        else
+            Time = String.valueOf(new SimpleDateFormat("kk:mm:ss").format(new java.util.Date(new java.util.Date().getTime())));
         char[] chArray = Time.toCharArray();
-        TimeCode = "" + chArray[0] + chArray[1] + chArray[3] + chArray[4];
-        if (settingsResource.isSwitch_Reverse()){
+        if (chArray[0] == '2' && chArray[1] == '4') {
+            chArray[0] = '0';
+            chArray[1] = '0';
+        } // функция SimpleDateFormat показывает часы в формате 1-24, здесь производится замена числа 24 на 00
+        if (settingsResource.isSwitch_Reverse())
             TimeCode = "" + chArray[4] + chArray[3] + chArray[1] + chArray[0];
+        else
+            TimeCode = "" + chArray[0] + chArray[1] + chArray[3] + chArray[4];
+        if (settingsResource.isSwitch_Seconds()) {
+            TimeCode = "" + chArray[0] + chArray[1] + chArray[3] + chArray[4] + chArray[6] + chArray[7];
+            if (settingsResource.isSwitch_Reverse())
+                TimeCode = "" + chArray[7] + chArray[6] + chArray[4] + chArray[3] + chArray[1] + chArray[0];
         }
+
+        Time = "" + chArray[0] + chArray[1] + ":" + chArray[3] + chArray[4] + ":" + chArray[6] + chArray[7];
         return Time;
     }
 

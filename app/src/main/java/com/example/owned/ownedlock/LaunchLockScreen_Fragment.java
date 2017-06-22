@@ -1,6 +1,5 @@
 package com.example.owned.ownedlock;
 
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -12,11 +11,6 @@ import android.widget.Button;
 public class LaunchLockScreen_Fragment extends Fragment {
 
     private Button Start;
-
-    public LaunchLockScreen_Fragment() {
-
-    }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -32,5 +26,4 @@ public class LaunchLockScreen_Fragment extends Fragment {
 
         return view;
     }
-
 }

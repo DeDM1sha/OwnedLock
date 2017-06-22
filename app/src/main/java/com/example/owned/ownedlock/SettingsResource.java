@@ -29,7 +29,7 @@ public class SettingsResource {
     protected boolean isSwitch_24h() {
         return Switch_24h;
     }
-
+/////////////////////////////////////////////////////////////////////////////
     protected void setSwitch_24h(boolean Time_24h) {
         this.Switch_24h = Time_24h;
     }
@@ -58,7 +58,9 @@ public class SettingsResource {
     protected boolean isSwitch_Seconds() {
         return Switch_Seconds;
     }
+/////////////////////////////////////////////////////////////////////////////
     protected void setSwitch_Seconds(boolean Seconds) {
         this.Switch_Seconds = Seconds;
     }
+/////////////////////////////////////////////////////////////////////////////
 }

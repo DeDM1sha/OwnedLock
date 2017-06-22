@@ -6,11 +6,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.IBinder;
 
-/**
- * Lock Screen Service
- *
- * @author Andy
- */
 public class LockScreenService extends Service {
     private BroadcastReceiver mReceiver;
 
@@ -30,7 +25,6 @@ public class LockScreenService extends Service {
         mReceiver = new LockScreenReceiver();
         registerReceiver(mReceiver, filter);
     }
-
 
     @Override
     public void onDestroy() {

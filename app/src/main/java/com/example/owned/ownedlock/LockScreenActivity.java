@@ -15,15 +15,8 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import java.text.SimpleDateFormat;
 
-
-/**
- * if the screen is locked, this Activity will show.
- *
- * @author Andy
- */
 public class LockScreenActivity extends Activity implements View.OnClickListener{
 
     public static boolean isLocked = false;
@@ -62,12 +55,7 @@ public class LockScreenActivity extends Activity implements View.OnClickListener
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED);
 
         setDefaultKeyMode(DEFAULT_KEYS_DISABLE);
-//        requestWindowFeature(Window.FEATURE_NO_TITLE);
-//        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-//                WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
         setContentView(R.layout.activity_lock_screen);
-
 
         sharedPreferences = getSharedPreferences(FORMAT, Context.MODE_PRIVATE);
         Format = sharedPreferences.getString(FORMAT, "");
@@ -196,7 +184,6 @@ public class LockScreenActivity extends Activity implements View.OnClickListener
             inWork = false;
         }
     }
-boolean a = false;
     private String getTime() {
             if (Format.equals("12h"))
                 Time = String.valueOf(new SimpleDateFormat("hh:mm:ss").format(new java.util.Date(new java.util.Date().getTime())));
@@ -207,37 +194,6 @@ boolean a = false;
                     chArray[0] = '0';
                     chArray[1] = '0';
                 } // функция SimpleDateFormat показывает часы в формате 1-24, здесь производится замена числа 24 на 00
-//                if (Hours.equals("ON")) {
-//                    if (chArray[1] == '9') {
-//                        chArray[0] = '1';
-//                        chArray[1] = '0';
-//                    }
-//                    if (chArray[0] == '1') {
-//                        chArray[0] = '1';
-//                        chArray[1] = '1';
-//                    }
-//                    if (chArray[1] == '1') {
-//                        chArray[0] = '1';
-//                        chArray[1] = '2';
-//                    }
-//                    if (chArray[1] == '8')
-//                        chArray[1] =  '9';
-//                    if (chArray[1] == '7')
-//                        chArray[1] = '8';
-//                    if (chArray[1] == '6')
-//                        chArray[1] = '7';
-//                    if (chArray[1] == '5')
-//                        chArray[1] = '6';
-//                    if (chArray[1] == '4')
-//                        chArray[0] = '3';
-//
-//                    if (chArray[1] == '3')
-//                        chArray[1] = '4';
-//                    if (chArray[1] == '2')
-//                        chArray[1] = '3';
-//                    if (chArray[1] == '1')
-//                        chArray[1] = '2';
-//                }
                 if (Reverse.equals("ON"))
                     TimeCode = "" + chArray[4] + chArray[3] + chArray[1] + chArray[0];
                  else
@@ -267,7 +223,6 @@ boolean a = false;
     public boolean onKeyDown(int keyCode, android.view.KeyEvent event) {
 
         if ((keyCode == KeyEvent.KEYCODE_HOME)) {
-            // Key code constant: Home key. This key is handled by the framework and is never delivered to applications.
             return true;
         }
         return super.onKeyDown(keyCode, event);
@@ -287,9 +242,8 @@ boolean a = false;
 
     @Override
     public void onBackPressed() {
-//return;
-}
-
+        return;
+    }
 
     @Override
     public void onResume() {
@@ -303,9 +257,6 @@ boolean a = false;
         super.onDestroy();
     }
 
-    /**
-     * virbate means that the screen is unlocked success
-     */
     private void virbate() {
         Vibrator vibrator = (Vibrator) this.getSystemService(Context.VIBRATOR_SERVICE);
         vibrator.vibrate(200);

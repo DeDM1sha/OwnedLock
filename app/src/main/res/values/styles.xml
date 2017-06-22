@@ -1,13 +1,10 @@
 <resources>
 
-    <!-- Base application theme. -->
     <style name="AppTheme" parent="@style/Theme.AppCompat.NoActionBar">
-        <!-- Customize your theme here. -->
     </style>
 
     <style name="LockTheme" parent = "@android:style/Theme.DeviceDefault.Wallpaper.NoTitleBar">
-        <!--<item name="windowActionBar">false</item>-->
-        <!--<item name="windowNoTitle">true</item>-->
         <item name="android:windowFullscreen">true</item>
     </style>
+
 </resources>

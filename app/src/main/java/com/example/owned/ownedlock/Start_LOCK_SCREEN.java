@@ -1,6 +1,5 @@
 package com.example.owned.ownedlock;
 
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,6 +15,5 @@ public class Start_LOCK_SCREEN extends Activity {
         startService(intent);
         Toast.makeText(Start_LOCK_SCREEN.this, "Блокировка включена", Toast.LENGTH_SHORT).show();
         finish();
-
     }
 }

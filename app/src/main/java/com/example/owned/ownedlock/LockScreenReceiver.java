@@ -11,7 +11,6 @@ final class Constant {
     private Constant() throws InstantiationException {
         throw new InstantiationException("This class is not for instantiation");
     }
-
 }
 public class LockScreenReceiver extends BroadcastReceiver {
 

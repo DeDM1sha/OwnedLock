@@ -9,7 +9,6 @@
         android:layout_height="match_parent"
         android:padding="10dp">
 
-
         <TextView
             android:id="@+id/Title"
             android:layout_width="wrap_content"
@@ -82,7 +81,6 @@
             android:layout_below="@+id/Time"
             android:layout_marginTop="61dp"
             android:text="TextView" />
-
 
     </RelativeLayout>
 

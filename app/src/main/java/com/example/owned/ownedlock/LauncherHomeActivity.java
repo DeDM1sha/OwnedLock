@@ -17,12 +17,6 @@ final class Validator {
         throw new InstantiationException("This class is not for instantiation");
     }
 
-    /**
-     * check whether be empty/null or not
-     *
-     * @param string
-     * @return
-     */
     public static boolean isEffective(String string) {
         if ((string == null) || ("".equals(string)) || (" ".equals(string))
                 || ("null".equals(string)) || ("\n".equals(string)))
@@ -66,12 +60,6 @@ public class LauncherHomeActivity extends Activity {
         super.onNewIntent(intent);
     }
 
-    /**
-     * get the system launcher package name and class name,we use system launcher as default<br/>
-     * also we can let user to choose a launcher from system laucher and our custom launchers,"BaiDu" lock screen app and "Go" lock screen app just do this.<br/>
-     *
-     * @param context
-     */
     private void getLauncherPackageName(Context context) {
         Intent intent = new Intent(Intent.ACTION_MAIN);
         intent.addCategory(Intent.CATEGORY_HOME);

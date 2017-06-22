@@ -20,7 +20,6 @@ public class ChangingPasswordsFragment extends Fragment {
     private final String SAVED_PASSWORD = "PASSWORD";
     private final String ALTERNATE_PASSWORD = "ALNERNATE_PASSWORD";
 
-
     private EditText CurrentPassword;
     private EditText NewPassword;
     private EditText RepeatPassword;
@@ -46,7 +45,7 @@ public class ChangingPasswordsFragment extends Fragment {
                 Title.setText("Изменение стартового пароля");
                 sharedPreferences = getActivity().getSharedPreferences(SAVED_PASSWORD, Context.MODE_PRIVATE);
                 UserPassword = sharedPreferences.getString(SAVED_PASSWORD, "");
-
+/////////////////////////////////////////////////////////////////////////////
                 Enter.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View e) {
@@ -81,7 +80,7 @@ public class ChangingPasswordsFragment extends Fragment {
                         Toast.makeText(getActivity(), "Альтернативного пароля еще не сущеcтвует, но Вы можете его создать", Toast.LENGTH_LONG).show();
                         CurrentPassword.setEnabled(false);
                     }
-
+/////////////////////////////////////////////////////////////////////////////
                 Enter.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View e) {
@@ -109,7 +108,7 @@ public class ChangingPasswordsFragment extends Fragment {
                     }
                 });
             }
+/////////////////////////////////////////////////////////////////////////////
         return view;
     }
-
 }

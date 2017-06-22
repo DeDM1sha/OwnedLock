@@ -52,7 +52,6 @@
                     android:textColor="@color/white"
                     android:textSize="@dimen/section_size" />
 
-
                 <TextView
                     android:id="@+id/Pin_12h"
                     android:layout_width="wrap_content"
@@ -134,7 +133,8 @@
                     android:layout_marginLeft="12dp"
                     android:layout_marginStart="12dp"
                     android:layout_marginTop="@dimen/margin_top_object"
-                    android:text="+1 час к паролю" />
+                    android:text="+1 час к паролю"
+                    android:enabled="false"/>
 
                 <Switch
                     android:id="@+id/Switch_Hours"
@@ -145,7 +145,8 @@
                     android:layout_alignParentRight="true"
                     android:layout_below="@+id/Switch_Reverse"
                     android:layout_marginEnd="13dp"
-                    android:layout_marginRight="13dp" />
+                    android:layout_marginRight="13dp"
+                    android:enabled="false"/>
 
                 <TextView
                     android:id="@+id/Text_Minutes"
@@ -157,7 +158,8 @@
                     android:layout_marginLeft="12dp"
                     android:layout_marginStart="12dp"
                     android:layout_marginTop="@dimen/margin_top_object"
-                    android:text="-5 минут к паролю" />
+                    android:text="-5 минут к паролю"
+                    android:enabled="false"/>
 
                 <Switch
                     android:id="@+id/Switch_Minutes"
@@ -168,7 +170,8 @@
                     android:layout_alignParentRight="true"
                     android:layout_below="@+id/Switch_Reverse"
                     android:layout_marginEnd="13dp"
-                    android:layout_marginRight="13dp" />
+                    android:layout_marginRight="13dp"
+                    android:enabled="false"/>
 
                 <TextView
                     android:id="@+id/Text_Seconds"
@@ -225,4 +228,5 @@
             </RelativeLayout>
         </ScrollView>
     </RelativeLayout>
+
 </FrameLayout>
